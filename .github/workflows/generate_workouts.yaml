@@ -24,14 +24,28 @@ jobs:
           python-version: '3.x'
 
       - name: Install Dependencies
-        run: pip install pandas
+        run: pip install pandas openai
 
       - name: Run the workout script
         run: python gen_workouts.py > workout_output.txt
+      
+      - name: Run the advice script
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+        run: python gen_advice.py
 
       - name: Create an issue from a file
+        id: create_issue
         uses: peter-evans/create-issue-from-file@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Weekly Workouts for ${{ steps.date.outputs.date }}
           content-filepath: ./workout_output.txt
+
+      - name: Add comment with trainer advice
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          issue-number: ${{ steps.create_issue.outputs.issue-number }}
+          body-path: ./workout_advice.md
+          token: ${{ secrets.GITHUB_TOKEN }}
+

@@ -25,12 +25,9 @@ jobs:
       - name: Run the workout script
         run: python gen_workouts.py > workout_output.txt
 
-      - name: Create GitHub issue with the workouts
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ISSUE_TITLE="Weekly Workouts for $(date +'%Y-%m-%d')"
-          ISSUE_BODY=$(cat workout_output.txt)
-          curl -X POST -H "Authorization: token $GH_TOKEN" \
-               -d "{\"title\":\"$ISSUE_TITLE\", \"body\":\"$ISSUE_BODY\"}" \
-               "https://api.github.com/repos/${{ github.repository }}/issues"
+      - name: Create an issue from a file
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Weekly Workouts for $(date +'%Y-%m-%d')
+          content-filepath: ./workout_output.txt

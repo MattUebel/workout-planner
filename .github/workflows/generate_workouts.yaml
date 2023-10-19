@@ -26,7 +26,7 @@ jobs:
         run: python gen_workouts.py > workout_output.txt
 
       - name: Create an issue from a file
-        uses: peter-evans/create-issue-from-file@v2
+        uses: peter-evans/create-issue-from-file@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Weekly Workouts for $(date +'%Y-%m-%d')

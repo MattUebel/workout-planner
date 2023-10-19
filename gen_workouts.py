@@ -4,6 +4,9 @@ import random
 def generate_weekly_workout(file_name):
     df = pd.read_csv(file_name)
     
+    # Initialize Markdown-formatted output string
+    md_output = "## Weekly Workout Plan\n\n"
+    
     # Categorize exercises
     legs_exercises = df[df['body_part'] == 'Legs']
     push_exercises = df[df['body_part'] == 'Push Movements']
@@ -30,14 +33,17 @@ def generate_weekly_workout(file_name):
     extra_push = random.sample(push_exercises['exercise_name'].tolist(), 1)
     weekly_workout['Day 3 - Core'] = specific_core + [extra_legs[0], extra_push[0]]
 
-    return weekly_workout
+    # Add the exercises to the Markdown-formatted output string
+    for day, exercises in weekly_workout.items():
+        md_output += f"### {day}\n\n"
+        for exercise in exercises:
+            md_output += f"- {exercise}\n"
+        md_output += "\n"
+
+    return md_output
 
 # Read in the CSV and generate a weekly workout plan
 weekly_plan = generate_weekly_workout('workouts.csv')
 
-# Display the plan
-for day, exercises in weekly_plan.items():
-    print(f"{day}:")
-    for exercise in exercises:
-        print(f"  - {exercise}")
-
+# Display the Markdown-formatted plan
+print(weekly_plan)

@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Generate Date for Title
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -29,5 +33,5 @@ jobs:
         uses: peter-evans/create-issue-from-file@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: Weekly Workouts for $(date +'%Y-%m-%d')
+          title: Weekly Workouts for ${{ steps.date.outputs.date }}
           content-filepath: ./workout_output.txt

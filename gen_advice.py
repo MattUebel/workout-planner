@@ -13,7 +13,7 @@ with open("workout_output.txt", "r") as f:
 # Create the conversation payload
 payload = {
     "model": "gpt-3.5-turbo",
-    "messages": {"role": "user", "content": f"You are a personal trainer. You are helping a client with their weekly workout plan. Please provide advice for the exercises in each day. Here is the plan:\n\n{workout_text}\n\n"},
+    "messages": [{"role": "user", "content": f"You are a personal trainer. You are helping a client with their weekly workout plan. Please provide advice for the exercises in each day. Here is the plan:\n\n{workout_text}\n\n"}],
 }
 
 # Make the API call

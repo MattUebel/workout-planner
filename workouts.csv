@@ -1,0 +1,46 @@
+exercise_name,main_category,body_part,reps_or_duration
+Squats,Strength,Legs,12
+Lunges,Strength,Legs,12
+Leg Press,Strength,Legs,12
+Calf Raises,Strength,Legs,15
+Leg Curl,Strength,Legs,12
+Jump Squats,Plyometric,Legs,30 sec
+Box Jumps,Plyometric,Legs,12
+Step Ups,Strength,Legs,12
+Side Leg Raises,Strength,Legs,15
+Wall Sit,Isometric,Legs,30 sec
+Push-ups,Strength,Push Movements,15
+Bench Press,Strength,Push Movements,10
+Shoulder Press,Strength,Push Movements,12
+Tricep Dips,Strength,Push Movements,12
+Diamond Push-ups,Strength,Push Movements,12
+Chest Fly,Strength,Push Movements,12
+Skull Crushers,Strength,Push Movements,10
+Pike Push-up,Strength,Push Movements,10
+Overhead Tricep Extension,Strength,Push Movements,12
+Close-grip Bench Press,Strength,Push Movements,12
+Pull-ups,Strength,Pull Movements,10
+Seated Row,Strength,Pull Movements,12
+Lat Pulldown,Strength,Pull Movements,12
+Face Pull,Strength,Pull Movements,12
+Bent Over Row,Strength,Pull Movements,12
+Chin-ups,Strength,Pull Movements,10
+Deadlift,Strength,Pull Movements,10
+T-Bar Row,Strength,Pull Movements,12
+Reverse Fly,Strength,Pull Movements,12
+Hammer Curls,Strength,Pull Movements,12
+Plank,Core,Core,30 sec
+Sit-ups,Core,Core,15
+Russian Twists,Core,Core,16
+Leg Raises,Core,Core,12
+Mountain Climbers,Plyometric,Core,30 sec
+Bicycle Crunches,Core,Core,16
+Toe Touches,Core,Core,16
+Reverse Crunch,Core,Core,12
+V-ups,Core,Core,12
+Flutter Kicks,Core,Core,30 sec
+Side Plank,Isometric,Core,30 sec
+L-sit,Isometric,Core,15 sec
+Windshield Wipers,Core,Core,12
+Hollow Hold,Isometric,Core,20 sec
+High Knees,Plyometric,Core,30 sec

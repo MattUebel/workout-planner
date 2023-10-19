@@ -1,0 +1,35 @@
+name: Generate Weekly Workouts
+
+on:
+  schedule:
+    # Run every Sunday at midnight
+    - cron: '0 0 * * 0'
+
+jobs:
+  generate_workouts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install pandas
+
+      - name: Run the workout script
+        run: python gen_workouts.py > workout_output.txt
+
+      - name: Create GitHub issue with the workouts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ISSUE_TITLE="Weekly Workouts for $(date +'%Y-%m-%d')"
+          ISSUE_BODY=$(cat workout_output.txt)
+          curl -X POST -H "Authorization: token $GH_TOKEN" \
+               -d "{\"title\":\"$ISSUE_TITLE\", \"body\":\"$ISSUE_BODY\"}" \
+               "https://api.github.com/repos/${{ github.repository }}/issues"

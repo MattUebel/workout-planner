@@ -12,7 +12,7 @@ with open("workout_output.txt", "r") as f:
 
 # Create the conversation payload
 payload = {
-    "engine": "gpt-3.5-turbo-16k",  # Using GPT-4
+    "engine": "gpt-3.5-turbo",
     "prompt": f"Hello my Personal Trainer! This is my workout plan for the week:\n{workout_text}\n\nCould you help with advice on the exercises for each day? Please respond with markdown formatted text",
     "max_tokens": 300
 }

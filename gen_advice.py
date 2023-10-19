@@ -13,15 +13,14 @@ with open("workout_output.txt", "r") as f:
 # Create the conversation payload
 payload = {
     "model": "gpt-3.5-turbo",
-    "prompt": f"Hello my Personal Trainer! This is my workout plan for the week:\n{workout_text}\n\nCould you help with advice on the exercises for each day? Please respond with markdown formatted text",
-    "max_tokens": 300
+    "messages": {"role": "user", "content": f"You are a personal trainer. You are helping a client with their weekly workout plan. Please provide advice for the exercises in each day. Here is the plan:\n\n{workout_text}\n\n"},
 }
 
 # Make the API call
 response = openai.ChatCompletion.create(**payload)
 
 # Extract and print the generated advice
-advice = response.choices[0].text.strip()
+advice = response['choices'][0]['message']['content']
 
 # Write the advice to a markdown file
 with open("workout_advice.md", "w") as f:

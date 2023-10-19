@@ -18,7 +18,7 @@ payload = {
 }
 
 # Make the API call
-response = openai.Completion.create(**payload)
+response = openai.ChatCompletion.create(**payload)
 
 # Extract and print the generated advice
 advice = response.choices[0].text.strip()

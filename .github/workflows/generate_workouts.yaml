@@ -34,21 +34,33 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
         run: python gen_advice.py
 
-      - uses: actions/github-script@v6
-        with:
-          script: |
-            const issues = await github.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              labels: ["workout-plan"],
-            });
-
-            const mostRecentIssue = issues.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
-
-            await github.issues.update({
-              issue_number: mostRecentIssue.number,
-              state: "closed",
-            });
+    - name: Close workout-plan issues
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const { owner, repo } = context.repo
+          const labelName = "workout-plan"
+          
+          const issues = await github.paginate(
+            github.rest.issues.listForRepo,
+            {
+              owner,
+              repo,
+              state: "open",
+              labels: labelName,
+            }
+          )
+          
+          for (const issue of issues) {
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: issue.number,
+              state: "closed"
+            })
+            
+            console.log(`Closed issue #${issue.number}`)
+          }
 
       - name: Create an issue from a file
         id: create_issue

@@ -41,6 +41,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Weekly Workouts for ${{ steps.date.outputs.date }}
           content-filepath: ./workout_output.txt
+          labels: workout-plan
 
       - name: Add comment with trainer advice
         uses: peter-evans/create-or-update-comment@v3

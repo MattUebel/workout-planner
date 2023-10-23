@@ -1,0 +1,37 @@
+name: Respond to Workout Plan Comments
+
+on:
+  issue_comment:
+    types: [created]
+    labes: [workout-plan]
+
+jobs:
+  respond_comment:
+    runs-on: ubuntu-latest
+    if: github.event.comment.user.login != 'github-actions[bot]'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: pip install openai requests
+
+    - name: Generate workout advice response
+      env:
+        OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ISSUE_URL: ${{ github.event.issue.url }}
+        COMMENT_TEXT: ${{ github.event.comment.body }}
+      run: python gen_advice_response.py
+
+    - name: Add advice as comment
+      uses: peter-evans/create-or-update-comment@v1
+      with:
+        issue-number: ${{ github.event.issue.number }}
+        body-file: comment_advice.md

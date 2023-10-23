@@ -34,6 +34,22 @@ jobs:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
         run: python gen_advice.py
 
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const issues = await github.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["workout-plan"],
+            });
+
+            const mostRecentIssue = issues.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+
+            await github.issues.update({
+              issue_number: mostRecentIssue.number,
+              state: "closed",
+            });
+
       - name: Create an issue from a file
         id: create_issue
         uses: peter-evans/create-issue-from-file@v4

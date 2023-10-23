@@ -31,10 +31,7 @@ jobs:
       run: python gen_advice_response.py
 
     - name: Add advice as comment
-      run: echo "COMMENT_BODY=$(cat comment_advice.md)" >> $GITHUB_ENV
-
-    - name: Add advice as comment
       uses: peter-evans/create-or-update-comment@v3
       with:
         issue-number: ${{ github.event.issue.number }}
-        body: ${{ env.COMMENT_BODY }}
+        body-path: comment_advice.md

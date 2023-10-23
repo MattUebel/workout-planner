@@ -3,7 +3,7 @@ name: Respond to Workout Plan Comments
 on:
   issue_comment:
     types: [created]
-    labes: [workout-plan]
+    lables: [workout-plan]
 
 jobs:
   respond_comment:

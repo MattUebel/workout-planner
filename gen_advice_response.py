@@ -26,7 +26,7 @@ prompt = f"""You are a personal trainer. You are helping a client with their wee
 
 # Generate trainer advice using ChatCompletion
 completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4-1106-preview",
     messages=[{"role": "user", "content": prompt}],
 )
 

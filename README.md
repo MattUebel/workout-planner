@@ -38,6 +38,10 @@ This repository contains a GitHub Actions workflow and associated Python scripts
 
 2. The `advice_response.yml` workflow triggers when an issue with the label `workout-plan` is commented on by a non-actions user. It calls the OpenAI API to generate advice and comments on the issue.
 
+## Limitations of Using Large Language Models for Workout Routines
+
+While our system utilizes OpenAI's GPT models to generate workout plans and provide personal trainer advice, it's important to note that these large language models can sometimes produce unrealistic or inaccurate content. We advise users to review the generated workout routines for realism and consult with a professional trainer if necessary. This approach ensures that the workouts are not only innovative but also safe and tailored to your fitness level.
+
 ## Troubleshooting
 
 - If the OpenAI call fails, check the API key and the rate limits for your account.
